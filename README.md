@@ -89,9 +89,9 @@ wsClient.unsubscribe(subscription);
 | getColumns                  | callbacks?: ICallbacks<IColumns[]>                                                                     | [Promise<IColumns[]>](#icolumns)                     | Fetch available columns                |
 | getForecast                 | Identifier: string, callbacks?: ICallbacks<IForecast[]>                                                | [Promise<IForecast[]>](#iforecast)                   | Retrieve forecast information          |
 | getForecastAggregates       | forecastId: string, params: IRequestParams, callbacks?: ICallbacks<IForecastAggregate[]>               | [Promise<IForecastAggregate[]>](#iforecastaggregate) | Fetch forecast aggregates              |
-| getLatestForecastAggregates | forecastId: string, params: ILatestAggregatesRequestParams, callbacks?: ICallbacks<IForecastAggregate> | [Promise<IForecastAggregate>](#iforecastaggregate)   | Get latest forecast aggregates         |
-| getForecastAccuracy         | forecastId: string, Identifier: string, callbacks?: ICallbacks<IForecastAccuracy>                      | [Promise<IForecastAccuracy>](#iforecastaccuracy)     | Retrieve forecast accuracy             |
-| streamForecastAggregates    | forecastId: string, ticker: string, subscriber: IStreamSubscriber<IForecastAggregate>                  | -                                                    | Stream forecast aggregates             |
+| getLatestForecastAggregates | forecastId: string, params: ILatestAggregatesRequestParams, callbacks?: ICallbacks<IForecastAggregate> | [Promise<IForecastAggregate\>](#iforecastaggregate)   | Get latest forecast aggregates         |
+| getForecastAccuracy         | forecastId: string, Identifier: string, callbacks?: ICallbacks<IForecastAccuracy>                      | [Promise<IForecastAccuracy\>](#iforecastaccuracy)     | Retrieve forecast accuracy             |
+| streamForecastAggregates    | forecastId: string, ticker: string, subscriber: IStreamSubscriber<IForecastAggregate\>                  | -                                                    | Stream forecast aggregates             |
 
 ## Type Definitions
 

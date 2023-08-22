@@ -7,7 +7,7 @@ import {
 } from '@microsoft/signalr';
 
 class BaseWSClient {
-	private readonly baseURL: string = 'https://slrs31easconsumerservices.eaift.com/';
+	private readonly baseURL: string = 'https://auroracapi.eaift.com/';
 	protected readonly apiKey: string;
 	protected connection: HubConnection;
 	constructor(apiKey: string) {

@@ -7,5 +7,6 @@
 		"outDir": "./dist/lib/es6",
 		"moduleResolution": "node"
 	},
-	"include": ["src/**/*", "__tests__/**/*"]
+	"include": ["src/**/*", "__tests__/**/*"],
+	"exclude": ["__tests__/**/*"]
 }

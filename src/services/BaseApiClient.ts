@@ -1,9 +1,8 @@
-import "cross-fetch/polyfill";
 import { fetch } from 'cross-fetch';
 import { IResponse, TBaseParams } from '../types';
 
 class BaseApiClient {
-	private readonly baseURL: string = 'https://slrs31easconsumerservices.eaift.com/';
+	private readonly baseURL: string = 'https://auroracapi.eaift.com/';
 	private readonly apiKey: string;
 
 	constructor(apiKey: string) {

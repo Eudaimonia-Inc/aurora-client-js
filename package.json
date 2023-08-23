@@ -1,5 +1,6 @@
 {
 	"name": "eudaimonia-js-lib",
+	"description": "The official JS client library for the Aurora REST and WebSocket API.",
 	"version": "0.0.1",
 	"repository": {
 		"type": "git",

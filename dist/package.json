@@ -1,0 +1,33 @@
+{
+	"name": "aurora-client-js",
+	"version": "0.0.1",
+	"description": "The Aurora JS Client is a JavaScript library that empowers developers to seamlessly interact with the Aurora REST and WebSocket API. With this library, you can effortlessly access data, retrieve forecast information, and execute various operations using both HTTP requests and WebSocket connections. To get started, please see the Getting Started Getting Started section in our documentation",
+	"main": "lib/es5/index.js",
+	"module": "lib/es6/index.js",
+	"sideEffects": false,
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Eudaimonia-Inc/aurora-client-js.git"
+	},
+	"keywords": [
+		"js-library",
+		"Aurora",
+		"Eudaimonia"
+	],
+    "files": [
+        "lib",
+        "LICENCE",
+        "package.json",
+        "README.md"
+    ],
+	"author": "",
+	"license": "MIT",
+	"types": "./lib/es5/index.d.ts",
+	"bugs": {
+		"url": "https://github.com/Eudaimonia-Inc/aurora-client-js/issues"
+	},
+	"homepage": "https://github.com/Eudaimonia-Inc/aurora-client-js#readme"
+}

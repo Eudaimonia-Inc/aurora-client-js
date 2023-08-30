@@ -1,7 +1,7 @@
 # Aurora JS Client
 
 The Aurora JS Client is a JavaScript library that empowers developers to seamlessly interact with the Aurora REST and WebSocket API. With this library, you can effortlessly access data, retrieve forecast information, and execute various operations using both HTTP requests and WebSocket connections.
-To get started, please see the Getting Started [Getting Started](https://aurora.eaift.com/#/docs/getting-started) section in our documentation
+To get started, please see the [Getting Started](https://aurora.eaift.com/#/docs/getting-started) section in our documentation
 
 ## Table of Contents
 
@@ -18,9 +18,9 @@ To get started, please see the Getting Started [Getting Started](https://aurora.
 Install it using npm or yarn:
 
 ```bash
-npm install aurora-api-client
+npm install aurora-client-js
 # or
-yarn add aurora-api-client
+yarn add aurora-client-js
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ yarn add aurora-api-client
 The Aurora JS Client provides an intuitive way to interact with the Aurora REST API.
 
 ```javascript
-import { AuroraApiClient } from 'aurora-api-client';
+import { AuroraApiClient } from 'aurora-client-js';
 
 // Create a new API client instance with your API key
 const apiKey = 'your-api-key';
@@ -62,7 +62,7 @@ apiClient
 The WebSocket client allows real-time interactions with the Aurora WebSocket API.
 
 ```javascript
-import { AuroraWSClient } from 'aurora-api-client';
+import { AuroraWSClient } from 'aurora-client-js';
 
 // Create a new WebSocket client instance with your API key
 const apiKey = 'your-api-key';

@@ -91,7 +91,7 @@ wsClient.unsubscribe(subscription);
 | getForecastAggregates       | forecastId: string, params: IRequestParams, callbacks?: ICallbacks<IForecastAggregate[]>               | [Promise<IForecastAggregate[]>](#iforecastaggregate) | Fetch forecast aggregates              |
 | getLatestForecastAggregates | forecastId: string, params: ILatestAggregatesRequestParams, callbacks?: ICallbacks<IForecastAggregate> | [Promise<IForecastAggregate\>](#iforecastaggregate)   | Get latest forecast aggregates         |
 | getForecastAccuracy         | forecastId: string, Identifier: string, callbacks?: ICallbacks<IForecastAccuracy>                      | [Promise<IForecastAccuracy\>](#iforecastaccuracy)     | Retrieve forecast accuracy             |
-| streamForecastAggregates    | forecastId: string, ticker: string, subscriber: IStreamSubscriber<IForecastAggregate\>                  | -                                                    | Stream forecast aggregates             |
+| streamForecastAggregates    | forecastId: string, identifier: string, subscriber: IStreamSubscriber<IForecastAggregate\>                  | -                                                    | Stream forecast aggregates             |
 
 ## Type Definitions
 

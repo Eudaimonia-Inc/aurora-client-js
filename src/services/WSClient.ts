@@ -10,10 +10,10 @@ class WSClient extends BaseWSClient {
 
 	async streamForecastAggregates(
 		forecastId: string,
-		ticker: string,
+		identifier: string,
 		subscriber: IStreamSubscriber<IForecastAggregate>
 	) {
-		return await this.streamSignalRChannel(this.forecastHub, 'Aggregates', [forecastId, ticker], subscriber);
+		return await this.streamSignalRChannel(this.forecastHub, 'Aggregates', [forecastId, identifier], subscriber);
 	}
 
 	async disconnect(connection: HubConnection) {

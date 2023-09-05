@@ -1,4 +1,5 @@
 import { IColumn, IColumns } from './IColumns';
+import { WSCryptoAggregate } from './ICrypto';
 import { IAggregate, IForecast, IForecastAggregate, IForecastAccuracy } from './IForecast';
 import { IIdentifier } from './IIdentifier';
 import { ICallbacks, ILatestAggregatesRequestParams, IRequestParams, TBaseParams } from './IRequestParams';
@@ -17,4 +18,5 @@ export type {
 	IForecastAccuracy,
 	IResponse,
 	ICallbacks,
+	WSCryptoAggregate,
 };

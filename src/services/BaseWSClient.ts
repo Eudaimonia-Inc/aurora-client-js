@@ -13,10 +13,14 @@ class BaseWSClient {
 	constructor(apiKey: string) {
 		this.apiKey = apiKey;
 	}
-	protected async connectToSignalRHub(hubName: string): Promise<HubConnection> {
+	protected async connectToSignalRHub(hubName: string, apiKeyAsToken?: boolean): Promise<HubConnection> {
 		try {
 			const connection = new HubConnectionBuilder()
-				.withUrl(this.baseURL + hubName, { skipNegotiation: true, transport: HttpTransportType.WebSockets })
+				.withUrl(this.baseURL + hubName, {
+					skipNegotiation: true,
+					transport: HttpTransportType.WebSockets,
+					accessTokenFactory: apiKeyAsToken ? () => this.apiKey : undefined,
+				})
 				.build();
 			this.connection = connection;
 			await connection.start();
@@ -31,11 +35,14 @@ class BaseWSClient {
 		hubName: string,
 		methodName: string,
 		args: any[],
-		subscriber: IStreamSubscriber<T>
+		subscriber: IStreamSubscriber<T>,
+		apiKeyAsToken?: boolean
 	): Promise<{ connection: HubConnection; subscription: ISubscription<T> } | null> {
 		try {
-			const connection = await this.connectToSignalRHub(hubName);
-			const stream = connection.stream<T>(methodName, this.apiKey, ...args);
+			const connection = await this.connectToSignalRHub(hubName, apiKeyAsToken);
+			const stream = apiKeyAsToken
+				? connection.stream<T>(methodName, ...args)
+				: connection.stream<T>(methodName, this.apiKey, ...args);
 			const subscription = stream.subscribe(subscriber);
 			return { connection, subscription };
 		} catch (error) {

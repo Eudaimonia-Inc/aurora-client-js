@@ -1,8 +1,9 @@
 import { fetch } from 'cross-fetch';
 import { IResponse, TBaseParams } from '../types';
+import { baseUrl } from '../constants/baseUrl';
 
 class BaseApiClient {
-	private readonly baseURL: string = 'https://auroracapi.eaift.com/';
+	private readonly baseURL: string = baseUrl;
 	private readonly apiKey: string;
 
 	constructor(apiKey: string) {

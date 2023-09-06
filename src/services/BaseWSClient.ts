@@ -5,21 +5,22 @@ import {
 	IStreamSubscriber,
 	ISubscription,
 } from '@microsoft/signalr';
+import { baseUrl } from '../constants/baseUrl';
 
 class BaseWSClient {
-	private readonly baseURL: string = 'https://auroracapi.eaift.com/';
+	private readonly baseURL: string = baseUrl;
 	protected readonly apiKey: string;
 	protected connection: HubConnection;
 	constructor(apiKey: string) {
 		this.apiKey = apiKey;
 	}
-	protected async connectToSignalRHub(hubName: string, apiKeyAsToken?: boolean): Promise<HubConnection> {
+	protected async connectToSignalRHub(hubName: string): Promise<HubConnection> {
 		try {
 			const connection = new HubConnectionBuilder()
 				.withUrl(this.baseURL + hubName, {
 					skipNegotiation: true,
 					transport: HttpTransportType.WebSockets,
-					accessTokenFactory: apiKeyAsToken ? () => this.apiKey : undefined,
+					accessTokenFactory: () => this.apiKey,
 				})
 				.build();
 			this.connection = connection;
@@ -35,14 +36,11 @@ class BaseWSClient {
 		hubName: string,
 		methodName: string,
 		args: any[],
-		subscriber: IStreamSubscriber<T>,
-		apiKeyAsToken?: boolean
+		subscriber: IStreamSubscriber<T>
 	): Promise<{ connection: HubConnection; subscription: ISubscription<T> } | null> {
 		try {
-			const connection = await this.connectToSignalRHub(hubName, apiKeyAsToken);
-			const stream = apiKeyAsToken
-				? connection.stream<T>(methodName, ...args)
-				: connection.stream<T>(methodName, this.apiKey, ...args);
+			const connection = await this.connectToSignalRHub(hubName);
+			const stream = connection.stream<T>(methodName, ...args);
 			const subscription = stream.subscribe(subscriber);
 			return { connection, subscription };
 		} catch (error) {

@@ -18,7 +18,7 @@ class WSClient extends BaseWSClient {
 	}
 
 	async streamCryptoAggregates(identifier: string, subscriber: IStreamSubscriber<WSCryptoAggregate>) {
-		return await this.streamSignalRChannel(this.cryptoHub, 'Aggregates', [identifier], subscriber, true);
+		return await this.streamSignalRChannel(this.cryptoHub, 'Aggregates', [identifier], subscriber);
 	}
 
 	async disconnect(connection: HubConnection) {

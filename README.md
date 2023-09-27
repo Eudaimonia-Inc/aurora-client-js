@@ -1,7 +1,7 @@
 # Aurora JS Client
 
 The Aurora JS Client is a JavaScript library that empowers developers to seamlessly interact with the Aurora REST and WebSocket API. With this library, you can effortlessly access data, retrieve forecast information, and execute various operations using both HTTP requests and WebSocket connections.
-To get started, please see the [Getting Started](https://aurora.eaift.com/#/docs/getting-started) section in our documentation
+To get started, please see the [Getting Started](https://aurora.eaift.com/#/docs) section in our documentation
 
 ## Table of Contents
 
@@ -25,8 +25,16 @@ yarn add aurora-client-js
 
 ## Usage
 
-### REST API
+Our WebSocket and REST APIs are designed around entitlements, ensuring you connect to the right hubs and access the data you need. For personalized examples, including your API key and entitlements, please [login](https://aurora.eaift.com/#/signin).
 
+To utilize the Crypto WebSocket and REST endpoints, there are two key prerequisites that need to be met:
+
+1. **Subscription Plan**: To access our REST API and WebSocket endpoints, you need an active subscription plan. Ensure that your subscription plan is up-to-date and grants you access to the specific API and WebSocket hubs you intend to use.
+2. **API Key**: You must possess a valid API key, which serves as your authentication token for accessing both the REST API and WebSocket endpoints. If you haven't generated an API key yet, you can create one by visiting the [API Key creation page](https://aurora.eaift.com/#/api-keys).
+
+Once you have an API key and an active subscription plan, you are ready to start using both the REST API and WebSocket endpoints to access real-time cryptocurrency data and Forecast insights.
+
+### REST API
 The Aurora JS Client provides an intuitive way to interact with the Aurora REST API.
 
 ```javascript

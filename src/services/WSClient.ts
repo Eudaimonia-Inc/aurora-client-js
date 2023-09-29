@@ -1,10 +1,12 @@
 import { HubConnection, IStreamSubscriber, ISubscription } from '@microsoft/signalr';
 import BaseWSClient from './BaseWSClient';
-import { IForecastAggregate, WSCryptoAggregate } from '../types';
+import { IForecastAggregate, IWSCryptoAggregate } from '../types';
 
 class WSClient extends BaseWSClient {
 	private forecastHub = 'hubs/forecast';
 	private cryptoHub = 'hubs/crypto';
+	private methodName = 'Aggregates';
+
 	constructor(apiKey: string) {
 		super(apiKey);
 	}
@@ -12,19 +14,19 @@ class WSClient extends BaseWSClient {
 	async streamForecastAggregates(
 		forecastId: string,
 		identifier: string,
-		period: number,
+		interval: number,
 		subscriber: IStreamSubscriber<IForecastAggregate>
 	) {
 		return await this.streamSignalRChannel(
 			this.forecastHub,
-			'Aggregates',
-			[forecastId, identifier, period],
+			this.methodName,
+			[forecastId, identifier, interval],
 			subscriber
 		);
 	}
 
-	async streamCryptoAggregates(identifier: string, subscriber: IStreamSubscriber<WSCryptoAggregate>) {
-		return await this.streamSignalRChannel(this.cryptoHub, 'Aggregates', [identifier], subscriber);
+	async streamCryptoAggregates(identifier: string, subscriber: IStreamSubscriber<IWSCryptoAggregate>) {
+		return await this.streamSignalRChannel(this.cryptoHub, this.methodName, [identifier], subscriber);
 	}
 
 	async disconnect(connection: HubConnection) {

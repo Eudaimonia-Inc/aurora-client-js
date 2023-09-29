@@ -63,6 +63,24 @@ apiClient
 	.catch((error) => {
 		console.error('An error happened:', error);
 	});
+
+// Fetch forecast aggregates
+apiClient
+	.getForecastAggregates('X:BTCUSD', {
+		From: 1695359590,
+		To: 1695995617,
+		Interval: 60,
+		Columns: ['Close'],
+		ForecastId: 'forecast-id'
+	})
+	.then((forecastAggregates) => {
+		console.log('Forecast Aggregates:', forecastAggregates);
+	})
+	.catch((error) => {
+		console.error('An error happened:', error);
+	});
+
+
 ```
 
 ### WebSocket API
@@ -94,11 +112,12 @@ wsClient.unsubscribe(subscription);
 | Method                      | Arguments                                                                                              | Return Type                                          | Description                            |
 | --------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- | -------------------------------------- |
 | getIdentifiers              | callbacks?: ICallbacks[IIdentifier[]>                                                                  | [Promise<IIdentifier[]>](#iidentifier)               | Fetch identifiers for data exploration |
-| getColumns                  | callbacks?: ICallbacks<IColumns[]>                                                                     | [Promise<IColumns[]>](#icolumns)                     | Fetch available columns                |
-| getForecast                 | Identifier: string, callbacks?: ICallbacks<IForecast[]>                                                | [Promise<IForecast[]>](#iforecast)                   | Retrieve forecast information          |
-| getForecastAggregates       | forecastId: string, params: IRequestParams, callbacks?: ICallbacks<IForecastAggregate[]>               | [Promise<IForecastAggregate[]>](#iforecastaggregate) | Fetch forecast aggregates              |
-| getLatestForecastAggregates | forecastId: string, params: ILatestAggregatesRequestParams, callbacks?: ICallbacks<IForecastAggregate> | [Promise<IForecastAggregate\>](#iforecastaggregate)   | Get latest forecast aggregates         |
-| getForecastAccuracy         | forecastId: string, Identifier: string, callbacks?: ICallbacks<IForecastAccuracy>                      | [Promise<IForecastAccuracy\>](#iforecastaccuracy)     | Retrieve forecast accuracy             |
+| getColumns                  | callbacks?: ICallbacks<IColumn[]>                                                                     | [Promise<IColumn[]>](#icolumns)                     | Fetch available columns                |
+| getForecast                 | identifier: string, callbacks?: ICallbacks<IForecast[]>                                                | [Promise<IForecast[]>](#iforecast)                   | Retrieve forecast information          |
+| getForecastAggregates       | identifier: string, params: IRequestParams, callbacks?: ICallbacks<IForecastAggregate[]>               | [Promise<IForecastAggregate[]>](#iforecastaggregate) | Fetch forecast aggregates              |
+| getLatestForecastAggregates | identifier: string, params: ILatestAggregatesRequestParams, callbacks?: ICallbacks<IForecastAggregate> | [Promise<IForecastAggregate\>](#iforecastaggregate)   | Get latest forecast aggregates         |
+| getForecastAccuracy         | identifier: string, ForecastId: string, callbacks?: ICallbacks<IForecastAccuracy>                      | [Promise<IForecastAccuracy\>](#iforecastaccuracy)     | Retrieve forecast accuracy             |
+| getHistoricalAggregates     | identifier: string, params: IHistoricalAggregatesRequestParams, callbacks?: ICallbacks<IForecastAccuracy>                      | [Promise<ICryptoAggregates\>](#iforecastaccuracy)     | Fetch crypto aggregates             |
 | streamForecastAggregates    | forecastId: string, identifier: string, period: number (minutes), subscriber: IStreamSubscriber<IForecastAggregate\>                  | -                                                    | Stream forecast aggregates             |
 | streamCryptoAggregates      | identifier: string, subscriber: IStreamSubscriber<WSCryptoAggregate\>                  | -                                                    | Stream crypto aggregates             |
 
@@ -108,7 +127,6 @@ wsClient.unsubscribe(subscription);
 | ----------------------------------------------------------------- | ---------------------------------------- |
 | [IIdentifier](#iidentifier)                                       | Identifier type                          |
 | [IColumn](#icolumn)                                               | Column information                       |
-| [IColumns](#icolumns)                                             | Columns with identifier                  |
 | [IForecast](#iforecast)                                           | Forecast information                     |
 | [IAggregate](#iaggregate)                                         | Aggregate data point                     |
 | [IForecastAggregate](#iforecastaggregate)                         | Forecast aggregate information           |
@@ -130,19 +148,12 @@ Column information.
 -   `type`: string
 -   `isNullable`: boolean
 
-### IColumns
-
-Columns with identifier.
-
--   Inherits from [IIdentifier](#iidentifier).
--   `columns`: Array of [IColumn](#icolumn).
-
 ### IForecast
 
 Forecast information.
 
--   `forecastId`: string
--   `forecastName`: string
+-   `id`: string
+-   `name`: string
 
 ### IAggregate
 

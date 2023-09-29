@@ -1,6 +1,6 @@
 export interface IForecast {
-	forecastId: string;
-	forecastName: string;
+	id: string;
+	name: string;
 }
 
 export interface IAggregate {

@@ -39,15 +39,15 @@ class BaseApiClient {
 		requestParams?: {
 			options?: RequestInit;
 			customHeaders?: Record<string, string>;
-			queryParams?: TBaseParams;
+			params?: TBaseParams;
 			callbacks?: { error?: (error: any) => void; success?: (data?: T) => void };
 		}
 	): Promise<T> {
-		const { options, customHeaders, queryParams, callbacks } = requestParams;
+		const { options, customHeaders, params, callbacks } = requestParams;
 		let url = `${this.baseURL}${path}`;
 		const headers = this.getHeaders(customHeaders);
-		if (queryParams) {
-			url = this.addQueryParams(url, queryParams);
+		if (params) {
+			url = this.addQueryParams(url, params);
 		}
 
 		try {

@@ -1,7 +1,8 @@
 import { Endpoints } from '../constants/endpoints';
 import {
 	ICallbacks,
-	IColumns,
+	IColumn,
+	ICryptoAggregate,
 	IForecast,
 	IForecastAccuracy,
 	IForecastAggregate,
@@ -9,6 +10,7 @@ import {
 	ILatestAggregatesRequestParams,
 	IRequestParams,
 } from '../types';
+import { IHistoricalAggregatesRequestParams } from '../types/IRequestParams';
 import BaseApiClient from './BaseApiClient';
 
 class ApiClient extends BaseApiClient {
@@ -17,48 +19,56 @@ class ApiClient extends BaseApiClient {
 	}
 
 	async getIdentifiers(callbacks?: ICallbacks<IIdentifier[]>): Promise<IIdentifier[]> {
-		return await this.fetchClient(Endpoints.data.identifiers, { callbacks });
+		return await this.fetchClient(`${Endpoints.reference}/Tickers`, { callbacks });
 	}
 
-	async getColumns(callbacks?: ICallbacks<IColumns[]>): Promise<IColumns[]> {
-		return await this.fetchClient(Endpoints.data.columns, { callbacks });
+	async getColumns(identifier: string, callbacks?: ICallbacks<IColumn[]>): Promise<IColumn[]> {
+		return await this.fetchClient(`${Endpoints.forecast}/${identifier}`, { callbacks });
 	}
 
-	async getForecast(Identifier: string, callbacks?: ICallbacks<IForecast[]>): Promise<IForecast[]> {
-		return await this.fetchClient(Endpoints.forecast, { queryParams: { Identifier }, callbacks });
+	async getForecast(identifier: string, callbacks?: ICallbacks<IForecast[]>): Promise<IForecast[]> {
+		return await this.fetchClient(`${Endpoints.forecast}/${identifier}`, { callbacks });
 	}
 
 	async getForecastAggregates(
-		forecastId: string,
+		identifier: string,
 		params: IRequestParams,
 		callbacks?: ICallbacks<IForecastAggregate[]>
 	): Promise<IForecastAggregate[]> {
-		return await this.fetchClient(`${Endpoints.forecast}/${forecastId}/aggregates`, {
-			queryParams: params,
+		return await this.fetchClient(`${Endpoints.forecast}/${identifier}/Aggregates`, {
+			params,
 			callbacks,
 		});
 	}
 
 	async getLatestForecastAggregates(
-		forecastId: string,
+		identifier: string,
 		params: ILatestAggregatesRequestParams,
 		callbacks?: ICallbacks<IForecastAggregate>
 	): Promise<IForecastAggregate> {
-		return await this.fetchClient(`${Endpoints.forecast}/${forecastId}/aggregates/latest`, {
-			queryParams: params,
+		return await this.fetchClient(`${Endpoints.forecast}/${identifier}/Aggregates/Latest`, {
+			params,
 			callbacks,
 		});
 	}
 
 	async getForecastAccuracy(
-		forecastId: string,
-		Identifier: string,
+		identifier: string,
+		ForecastId: string,
 		callbacks?: ICallbacks<IForecastAccuracy>
 	): Promise<IForecastAccuracy> {
-		return await this.fetchClient(`${Endpoints.forecast}/${forecastId}/accuracy`, {
-			queryParams: { Identifier },
+		return await this.fetchClient(`${Endpoints.forecast}/${identifier}/Accuracy`, {
+			params: { ForecastId },
 			callbacks,
 		});
+	}
+
+	async getHistoricalAggregates(
+		identifier: string,
+		params: IHistoricalAggregatesRequestParams,
+		callbacks?: ICallbacks<ICryptoAggregate[]>
+	): Promise<ICryptoAggregate[]> {
+		return await this.fetchClient(`${Endpoints.historical}/${identifier}/Aggregates`, { params, callbacks });
 	}
 }
 

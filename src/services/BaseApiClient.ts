@@ -53,13 +53,13 @@ class BaseApiClient {
 		try {
 			const response = await fetch(url, { ...options, headers });
 			const data: IResponse<T> = await response.json();
-			const result = data.result;
+			const results = data.results;
 			if (!response.ok) {
 				throw new Error(`Request failed with status: ${response.status}\n${data.message || 'Unknown error'}`);
 			}
 
-			callbacks?.success && callbacks?.success(result);
-			return result;
+			callbacks?.success && callbacks?.success(results);
+			return results;
 		} catch (error) {
 			callbacks?.error && callbacks?.error(error);
 			throw new Error(`Request error: ${error.message}`);

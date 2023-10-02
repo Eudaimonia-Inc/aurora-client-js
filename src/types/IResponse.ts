@@ -3,5 +3,5 @@ export interface IResponse<T> {
 	errors?: any | null;
 	success?: boolean;
     message?: string;
-	result: T;
+	results: T;
 }

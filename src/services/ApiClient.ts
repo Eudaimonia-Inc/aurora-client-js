@@ -1,3 +1,4 @@
+import { IMarketNewsArticle, IMarketNewsEvent } from './../types/IMarketNews';
 import { Endpoints } from '../constants/endpoints';
 import {
 	ICallbacks,
@@ -9,8 +10,9 @@ import {
 	IIdentifier,
 	ILatestAggregatesRequestParams,
 	IRequestParams,
+	IAggregatesPrice,
+	IHistoricalAggregatesRequestParams, IMarketNewsRequestParams, IPaginationRequestParams, IMarketSentiment, IMarketSentimentRequestParams
 } from '../types';
-import { IHistoricalAggregatesRequestParams } from '../types/IRequestParams';
 import BaseApiClient from './BaseApiClient';
 
 class ApiClient extends BaseApiClient {
@@ -69,6 +71,41 @@ class ApiClient extends BaseApiClient {
 		callbacks?: ICallbacks<ICryptoAggregate[]>
 	): Promise<ICryptoAggregate[]> {
 		return await this.fetchClient(`${Endpoints.historical}/${identifier}/Aggregates`, { params, callbacks });
+	}
+
+	async getAggregatesPrices(
+		params: IPaginationRequestParams,
+		callbacks?: ICallbacks<IAggregatesPrice[]>
+	): Promise<IAggregatesPrice[]> {
+		return await this.fetchClient(`${Endpoints.aggregates}/Prices`, { params, callbacks });
+	}
+
+	async getMarketNews(
+		params: IMarketNewsRequestParams,
+		callbacks?: ICallbacks<IMarketNewsArticle[]>
+	): Promise<IMarketNewsArticle[]> {
+		return await this.fetchClient(Endpoints.marketNews, { params, callbacks });
+	}
+
+	async getMarketEvents(
+		params: IMarketNewsRequestParams,
+		callbacks?: ICallbacks<IMarketNewsEvent[]>
+	): Promise<IMarketNewsEvent[]> {
+		return await this.fetchClient(`${Endpoints.marketNews}/Events`, { params, callbacks });
+	}
+
+	async getMarketNewsTypes(
+		callbacks?: ICallbacks<string[]>
+	): Promise<string[]> {
+		return await this.fetchClient(`${Endpoints.marketNews}/Types`, { callbacks });
+	}
+
+	async getMarketSentiment(
+		ticker: string,
+		params: IMarketSentimentRequestParams,
+		callbacks?: ICallbacks<IMarketSentiment[]>
+	): Promise<IMarketSentiment[]> {
+		return await this.fetchClient(`${Endpoints.marketSentiment}/${ticker}`, { params, callbacks });
 	}
 }
 

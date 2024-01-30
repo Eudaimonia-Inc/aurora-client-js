@@ -3,5 +3,7 @@ export interface IResponse<T> {
 	errors?: any | null;
 	success?: boolean;
     message?: string;
+	pageNumber?: number;
+	pageSize?: number;
 	results: T;
 }

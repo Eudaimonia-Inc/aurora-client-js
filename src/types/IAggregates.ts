@@ -8,6 +8,5 @@ export interface IAggregatesPrice {
     change: number;
     high: number;
     low: number;
-    volume: number;
     chart: number[];
 }
